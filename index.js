@@ -48,7 +48,7 @@ module.exports =
 	'use strict';
 
 	// list here all supported plugins
-	var pluginsList = ['cordova-plugin-camera', 'cordova-plugin-device', 'cordova-plugin-geolocation', 'cordova-plugin-contacts', 'cordova-plugin-chrome-apps-sockets-tcp', 'cordova-plugin-sms'];
+	var pluginsList = ['cordova-plugin-camera', 'cordova-plugin-device', 'cordova-plugin-geolocation', 'cordova-plugin-contacts', 'cordova-plugin-chrome-apps-sockets-tcp', 'cordova-plugin-sms', 'cordova-plugin-bluetooth-serial'];
 
 	exports.install = function (Vue, options) {
 
@@ -86,18 +86,20 @@ module.exports =
 /***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./cordova-plugin-camera": 2,
-		"./cordova-plugin-camera.js": 2,
-		"./cordova-plugin-chrome-apps-sockets-tcp": 3,
-		"./cordova-plugin-chrome-apps-sockets-tcp.js": 3,
-		"./cordova-plugin-contacts": 4,
-		"./cordova-plugin-contacts.js": 4,
-		"./cordova-plugin-device": 5,
-		"./cordova-plugin-device.js": 5,
-		"./cordova-plugin-geolocation": 6,
-		"./cordova-plugin-geolocation.js": 6,
-		"./cordova-plugin-sms": 7,
-		"./cordova-plugin-sms.js": 7
+		"./cordova-plugin-bluetooth-serial ": 2,
+		"./cordova-plugin-bluetooth-serial .js": 2,
+		"./cordova-plugin-camera": 3,
+		"./cordova-plugin-camera.js": 3,
+		"./cordova-plugin-chrome-apps-sockets-tcp": 4,
+		"./cordova-plugin-chrome-apps-sockets-tcp.js": 4,
+		"./cordova-plugin-contacts": 5,
+		"./cordova-plugin-contacts.js": 5,
+		"./cordova-plugin-device": 6,
+		"./cordova-plugin-device.js": 6,
+		"./cordova-plugin-geolocation": 7,
+		"./cordova-plugin-geolocation.js": 7,
+		"./cordova-plugin-sms": 8,
+		"./cordova-plugin-sms.js": 8
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -122,6 +124,26 @@ module.exports =
 	exports.install = function (Vue, options, cb) {
 	  document.addEventListener('deviceready', function () {
 
+	    if (typeof bluetoothSerial === 'undefined') {
+	      return cb(false);
+	    }
+
+	    // pass through the sms object
+	    Vue.cordova.sms = bluetoothSerial;
+
+	    return cb(true);
+	  }, false);
+	};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	exports.install = function (Vue, options, cb) {
+	  document.addEventListener('deviceready', function () {
+
 	    if (typeof navigator.camera === 'undefined') {
 	      return cb(false);
 	    }
@@ -134,7 +156,7 @@ module.exports =
 	};
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -154,7 +176,7 @@ module.exports =
 	};
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -174,7 +196,7 @@ module.exports =
 	};
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -209,7 +231,7 @@ module.exports =
 	};
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -229,7 +251,7 @@ module.exports =
 	};
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 	'use strict';
