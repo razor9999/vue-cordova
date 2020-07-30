@@ -129,7 +129,7 @@ module.exports =
 	    }
 
 	    // pass through the sms object
-	    Vue.cordova.sms = bluetoothSerial;
+	    Vue.cordova.bluetoothSerial = bluetoothSerial;
 
 	    return cb(true);
 	  }, false);
